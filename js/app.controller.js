@@ -24,6 +24,7 @@ function onInit() {
                 var lng = location.lng;
                 var createdAt = Date.now();
                 locService.creatNewLocation(lat, lng, createdAt, placeName);
+                onAddMarker(lat,lng)
                 locService.getLocs().then((places) => {
                     renderPlaces(places);
                 })
@@ -43,9 +44,9 @@ function getPosition() {
     });
 }
 
-function onAddMarker() {
+function onAddMarker(lat,lng) {
     console.log("Adding a marker");
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+    mapService.addMarker({ lat,lng });
 }
 
 function onGetLocs() {
@@ -90,6 +91,7 @@ function onRemovePlace(placeId) {
 }
 
 function onGoPlace(lat, lng) {
+    onAddMarker(lat,lng)
     mapService.panTo(lat, lng);
 }
 
@@ -100,6 +102,7 @@ function onSearchAdd() {
     var searchVal = value.split(' ').join('+')
     mapService.geoCode(searchVal).then((coords) => {
         mapService.panTo(coords.locations.lat, coords.locations.lng)
+        onAddMarker(coords.locations.lat,coords.locations.lng)
         locService.creatNewLocation(coords.locations.lat, coords.locations.lng, Date.now(), coords.name);
         locService.getLocs().then((places) => {
             renderPlaces(places);
