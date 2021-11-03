@@ -10,6 +10,7 @@ window.onGetUserPos = onGetUserPos;
 window.onGoPlace = onGoPlace;
 window.onRemovePlace = onRemovePlace;
 window.onSearchAdd = onSearchAdd;
+window.onGoUrlParams = onGoUrlParams;
 
 
 function onInit() {
@@ -100,7 +101,43 @@ function onSearchAdd() {
     mapService.geoCode(searchVal).then((coords) => {
         mapService.panTo(coords.lat, coords.lng)
     })
+}
+
+function onGoUrlParams() {
+    const str = 'lat=3.14&lng=3.14'
+    const newUrl = new URLSearchParams(str)
+
+    var coords = locService.getLocs().then((res) => {
+        return res[res.length - 1]
+    })
+
+    .then((coords) => {
+            newUrl.set('lat', coords.lat)
+            newUrl.set('lng', coords.lng)
+            return newUrl
+        })
+        .then((res) => {
+            var NewStr = res.toString()
+            return `http://nofaralon.github.io/Travel-Tip?${NewStr}`
+        })
+        .then((url) => {
+            // console.log(url);
+            window.location.assign(url);
+        })
 
 
 
 }
+
+
+// var url = window.location.href
+//     const newparam = new URLSearchParams(url)
+//     console.log(newparam.get('lat'));
+//     if (newparam.get('lat')) {
+//         var coords = {
+//             lat: newparam.get('lat'),
+//             lng: newparam.get('lng')
+//         }
+//         lat = coords.lat
+//         lng = coords.lng
+//     }
