@@ -24,7 +24,7 @@ function onInit() {
                 var lng = location.lng;
                 var createdAt = Date.now();
                 locService.creatNewLocation(lat, lng, createdAt, placeName);
-                onAddMarker(lat,lng)
+                onAddMarker(lat, lng)
                 locService.getLocs().then((places) => {
                     renderPlaces(places);
                 })
@@ -44,9 +44,9 @@ function getPosition() {
     });
 }
 
-function onAddMarker(lat,lng) {
+function onAddMarker(lat, lng) {
     console.log("Adding a marker");
-    mapService.addMarker({ lat,lng });
+    mapService.addMarker({ lat, lng });
 }
 
 function onGetLocs() {
@@ -75,8 +75,8 @@ function renderPlaces(places) {
         return `<tr>
                 <td><img class="icon" src="img/icon.png" ></td>
                 <td>${place.name}</td>
-                <td><button class="remove" onclick="onRemovePlace(${place.id})"> X </button>
-                <td><button class="go" onclick="onGoPlace(${place.lat},${place.lng})"> Go! </button></td>
+                <td><button class="remove btn" onclick="onRemovePlace(${place.id})"> X </button>
+                <td><button class="go btn" onclick="onGoPlace(${place.lat},${place.lng})"> Go! </button></td>
             </tr>`;
     });
 
@@ -91,7 +91,7 @@ function onRemovePlace(placeId) {
 }
 
 function onGoPlace(lat, lng) {
-    onAddMarker(lat,lng)
+    onAddMarker(lat, lng)
     mapService.panTo(lat, lng);
 }
 
@@ -102,7 +102,7 @@ function onSearchAdd() {
     var searchVal = value.split(' ').join('+')
     mapService.geoCode(searchVal).then((coords) => {
         mapService.panTo(coords.locations.lat, coords.locations.lng)
-        onAddMarker(coords.locations.lat,coords.locations.lng)
+        onAddMarker(coords.locations.lat, coords.locations.lng)
         locService.creatNewLocation(coords.locations.lat, coords.locations.lng, Date.now(), coords.name);
         locService.getLocs().then((places) => {
             renderPlaces(places);

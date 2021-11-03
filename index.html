@@ -5,30 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelTip</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <h1>TravelTip</h1>
-    <input type="search" class="search">
-    <input type="submit" onclick="onSearchAdd()">
+    <header class="main-header main-layout">
+        <h1>TravelTip 🚩</h1>
 
-    <button onclick="onGoUrlParams()">Go to urlParams</button>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+    </header>
 
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: <span class="locs"></span></p>
+    <!-- <div class="main-search main-layout">
+        <input type="search" class="search">
+        <input class="btn" type="submit" onclick="onSearchAdd()">
 
-    <table class="my-places">
-        <tbody>
+    </div> -->
 
-        </tbody>
+    <div class="btns main-layout">
+        <div class="main-search ">
+            <input type="search" class="search">
+            <input class="btn" type="submit" onclick="onSearchAdd()">
+        </div>
+        <button onclick="onGoUrlParams()" class="btn">Go to urlParams</button>
+        <button onclick="onGetUserPos()" class="btn">Get Your Position</button>
+    </div>
 
-    </table>
+
+    <main class="main-continer main-layout">
+        <div class="map" id="map" style="width:50%; height: 400px;"></div>
+
+        <div class="main-places">
+            <h2>My Location:</h2>
+            <table class="my-places">
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <!-- <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button> -->
+    <!-- <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button> -->
+    <!-- <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button> -->
+
+    <div class="your-loc main-layout">
+        <p>You are at: <span class="user-pos"></span></p>
+        <p>Locations: <span class="locs "></span></p>
+
+    </div>
+
 
     <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
