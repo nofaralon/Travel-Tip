@@ -1,16 +1,17 @@
 export const locService = {
     getLocs,
     creatNewLocation,
-    saveLocations
+    saveLocations,
+    getKey
 }
-import {storage} from './storage.service.js'
+import { storage } from './storage.service.js'
 
-var gIdx = 3;
+var gIdx = 1;
 
 
 const locs = [
-    { id: 1, name: 'Greatplace', lat: 32.047104, lng: 34.832384, createdAt: 1121255, updatedAt: 1121255 },
-    { id: 2, name: 'Neveragain', lat: 32.047201, lng: 34.832581, createdAt: 1525255, updatedAt: 1525255 }
+    // { id: 1, name: 'Greatplace', lat: 32.047104, lng: 34.832384, createdAt: 1121255, updatedAt: 1121255 },
+    // { id: 2, name: 'Neveragain', lat: 32.047201, lng: 34.832581, createdAt: 1525255, updatedAt: 1525255 }
 ]
 
 function getLocs() {
@@ -21,14 +22,18 @@ function getLocs() {
     });
 }
 
-const LOCS_KEY='locationsDB'
-function saveLocations(){
-    storage.save(LOCS_KEY,locs)
+const LOCS_KEY = 'locationsDB'
+
+function saveLocations() {
+    storage.save(LOCS_KEY, locs)
 }
 
+function getKey() {
+    return LOCS_KEY
+}
 
 function creatNewLocation(lat, lng, createdAt, name) {
-    const loc= {
+    const loc = {
         id: gIdx++,
         name,
         lat,
@@ -38,5 +43,5 @@ function creatNewLocation(lat, lng, createdAt, name) {
     }
     locs.push(loc)
     console.log(locs)
-    saveLocations
+    saveLocations()
 }

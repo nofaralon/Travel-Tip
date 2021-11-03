@@ -1,5 +1,6 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { storage } from './services/storage.service.js'
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
@@ -13,6 +14,9 @@ function onInit() {
             console.log('Map is ready');
         })
         .catch(() => console.log('Error: cannot init map'));
+    var key = locService.getKey()
+    var places = storage.load(key)
+    if (places) renderPlaces(places)
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -51,4 +55,31 @@ function onGetUserPos() {
 function onPanTo() {
     console.log('Panning the Map');
     mapService.panTo(35.6895, 139.6917);
+}
+
+
+function renderPlaces(places) {
+
+    var strHtmls = places.map(function(place) {
+        return `<tr>
+                <td><img class="icon" src="img/icon.png" ></td>
+                <td>${place.name}</td>
+                <td><button class="remove" onclick="onRemovePlace(${place.id})"> X </button>
+                <td><button class="go" onclick="onGoPlace(${place.id})"> Go! </button></td>
+            </tr>`
+    })
+
+    document.querySelector('tbody').innerHTML = strHtmls.join('');
+}
+
+function onRemovePlace(placeId) {
+    removePlace(placeId)
+    var places = loadFromStorage(PLACES_KEY)
+    renderPlaces(places)
+
+
+}
+
+function onGoPlace(placeId) {
+
 }
