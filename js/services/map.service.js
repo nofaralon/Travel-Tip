@@ -4,6 +4,8 @@ export const mapService = {
     panTo
 }
 
+import { locService } from './loc.service.js'
+
 var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -25,6 +27,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 console.log(location);
                 var lat = location.lat
                 var lng = location.lng
+                var createdAt = Date.now()
+                var newPlace = locService.creatNewLocation(lat, lng, createdAt, placeName)
+                console.log(newPlace);
             });
         })
 }
