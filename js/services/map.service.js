@@ -58,7 +58,11 @@ function geoCode(searchVal) {
     const API_KEY = 'AIzaSyCs-QKtNa_l3qyNxdpxi7YM7rRgpKvTJU8';
     const prm = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchVal}&key=${API_KEY}`)
         .then(res => {
-            return res.data.results[0].geometry.location
+            console.log(res)
+            return {
+                locations:res.data.results[0].geometry.location,
+                name:res.data.results[0].formatted_address
+            }
         })
         .catch(err => {
             console.log('Had issues talking to server', err);

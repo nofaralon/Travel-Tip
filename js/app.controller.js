@@ -99,7 +99,11 @@ function onSearchAdd() {
     var value = elInput.value
     var searchVal = value.split(' ').join('+')
     mapService.geoCode(searchVal).then((coords) => {
-        mapService.panTo(coords.lat, coords.lng)
+        mapService.panTo(coords.locations.lat, coords.locations.lng)
+        locService.creatNewLocation(coords.locations.lat, coords.locations.lng, Date.now(), coords.name);
+        locService.getLocs().then((places) => {
+            renderPlaces(places);
+        })
     })
 }
 
