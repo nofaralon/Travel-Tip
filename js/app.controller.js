@@ -7,6 +7,7 @@ window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+window.onRemovePlace = onRemovePlace;
 
 function onInit() {
     mapService.initMap()
@@ -73,11 +74,9 @@ function renderPlaces(places) {
 }
 
 function onRemovePlace(placeId) {
-    removePlace(placeId)
+    locService.removePlace(placeId)
     var places = loadFromStorage(PLACES_KEY)
-    renderPlaces(places)
-
-
+    if (places) renderPlaces(places)
 }
 
 function onGoPlace(placeId) {

@@ -2,17 +2,15 @@ export const locService = {
     getLocs,
     creatNewLocation,
     saveLocations,
-    getKey
+    getKey,
+    removePlace
 }
 import { storage } from './storage.service.js'
 
 var gIdx = 1;
 
 
-const locs = [
-    // { id: 1, name: 'Greatplace', lat: 32.047104, lng: 34.832384, createdAt: 1121255, updatedAt: 1121255 },
-    // { id: 2, name: 'Neveragain', lat: 32.047201, lng: 34.832581, createdAt: 1525255, updatedAt: 1525255 }
-]
+const locs = []
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -44,4 +42,12 @@ function creatNewLocation(lat, lng, createdAt, name) {
     locs.push(loc)
     console.log(locs)
     saveLocations()
+}
+
+function removePlace(placeId) {
+    var placeIdx = locs.findIndex(function(place) {
+        return placeId === place.id
+    })
+    locs.splice(placeIdx, 1)
+    saveToStorage(LOCS_KEY, locs)
 }
