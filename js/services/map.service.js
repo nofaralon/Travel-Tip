@@ -19,18 +19,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     zoom: 15
                 })
             console.log('Map!', gMap);
+            return gMap
         })
-        .then(() => {
-            gMap.addListener("click", (mapsMouseEvent) => {
-                var placeName = prompt('Enter your place name')
-                var location = mapsMouseEvent.latLng.toJSON()
-                console.log(location);
-                var lat = location.lat
-                var lng = location.lng
-                var createdAt = Date.now()
-                locService.creatNewLocation(lat, lng, createdAt, placeName)
-            });
-        })
+        
 }
 
 function addMarker(loc) {
