@@ -1,7 +1,8 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    geoCode
 }
 
 import { locService } from './loc.service.js'
@@ -9,19 +10,16 @@ import { locService } from './loc.service.js'
 var gMap;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
-            console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
                     center: { lat, lng },
                     zoom: 15
                 })
-            console.log('Map!', gMap);
             return gMap
         })
-        
+
 }
 
 function addMarker(loc) {
@@ -52,4 +50,18 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+
+
+function geoCode(searchVal) {
+    const API_KEY = 'AIzaSyCs-QKtNa_l3qyNxdpxi7YM7rRgpKvTJU8';
+    const prm = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchVal}&key=${API_KEY}`)
+        .then(res => {
+            return res.data.results[0].geometry.location
+        })
+        .catch(err => {
+            console.log('Had issues talking to server', err);
+        })
+    return prm
 }

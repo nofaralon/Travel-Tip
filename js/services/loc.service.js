@@ -11,11 +11,7 @@ var gIdx = 1;
 
 const LOCS_KEY = 'locationsDB'
 
-<<<<<<< HEAD
-const locs = []
-=======
 const locs = storage.load(LOCS_KEY) || []
->>>>>>> 43eb9a878a56517e2bdf224e4a6327446d0fc90c
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -44,7 +40,6 @@ function creatNewLocation(lat, lng, createdAt, name) {
         updatedAt: createdAt
     }
     locs.push(loc)
-    console.log(locs)
     saveLocations()
 }
 
@@ -53,5 +48,5 @@ function removePlace(placeId) {
         return placeId === place.id
     })
     locs.splice(placeIdx, 1)
-    saveToStorage(LOCS_KEY, locs)
+    saveLocations()
 }
