@@ -1,6 +1,7 @@
 export const locService = {
     getLocs,
-    creatNewLocation
+    creatNewLocation,
+    saveLocations
 }
 import {storage} from './storage.service.js'
 
@@ -27,7 +28,7 @@ function saveLocations(){
 
 
 function creatNewLocation(lat, lng, createdAt, name) {
-    return {
+    const loc= {
         id: gIdx++,
         name,
         lat,
@@ -35,4 +36,7 @@ function creatNewLocation(lat, lng, createdAt, name) {
         createdAt,
         updatedAt: createdAt
     }
+    locs.push(loc)
+    console.log(locs)
+    saveLocations
 }

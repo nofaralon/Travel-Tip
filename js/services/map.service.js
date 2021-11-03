@@ -28,8 +28,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 var lat = location.lat
                 var lng = location.lng
                 var createdAt = Date.now()
-                var newPlace = locService.creatNewLocation(lat, lng, createdAt, placeName)
-                console.log(newPlace);
+                locService.creatNewLocation(lat, lng, createdAt, placeName)
             });
         })
 }
