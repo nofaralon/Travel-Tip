@@ -23,6 +23,7 @@ function onInit() {
             lat: newparam.get('lat'),
             lng: newparam.get('lng')
         }
+        console.log(coords)
         lat = coords.lat
         lng = coords.lng
         mapService
