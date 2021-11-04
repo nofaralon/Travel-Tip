@@ -14,11 +14,11 @@ window.onGoUrlParams = onGoUrlParams;
 
 
 function onInit() {
-    console.log('hi')
     var url = window.location.href
     console.log(url);
     const newparam = new URLSearchParams(url)
     console.log(new URLSearchParams(url))
+    console.log('hi test')
     if (newparam.get('lat')) {
         var coords = {
             lat: newparam.get('lat'),
