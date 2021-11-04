@@ -17,7 +17,37 @@ function onInit() {
     console.log('hi')
     var url = window.location.href
     console.log(url);
-    mapService
+    const newparam = new URLSearchParams(url)
+    if (newparam.get('lat')) {
+        var coords = {
+            lat: newparam.get('lat'),
+            lng: newparam.get('lng')
+        }
+        lat = coords.lat
+        lng = coords.lng
+        mapService
+        .initMap(lat,lng)
+        .then((gMap) => {
+            gMap.addListener("click", (mapsMouseEvent) => {
+                var placeName = prompt("Enter your place name");
+                var location = mapsMouseEvent.latLng.toJSON();
+                var lat = location.lat;
+                var lng = location.lng;
+                var createdAt = Date.now();
+                locService.creatNewLocation(lat, lng, createdAt, placeName);
+                onAddMarker(lat, lng)
+                locService.getLocs().then((places) => {
+                    renderPlaces(places);
+                })
+            });
+        })
+
+    .catch(() => console.log("Error: cannot init map"));
+    var key = locService.getKey();
+    var places = storage.load(key);
+    if (places) renderPlaces(places);
+    }else{
+        mapService
         .initMap()
         .then((gMap) => {
             gMap.addListener("click", (mapsMouseEvent) => {
@@ -38,6 +68,8 @@ function onInit() {
     var key = locService.getKey();
     var places = storage.load(key);
     if (places) renderPlaces(places);
+    }
+    
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
