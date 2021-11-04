@@ -18,12 +18,12 @@ function onInit() {
     var url = window.location.href
     console.log(url);
     const newparam = new URLSearchParams(url)
+    console.log(newparam.get('lat'))
     if (newparam.get('lat')) {
         var coords = {
             lat: newparam.get('lat'),
             lng: newparam.get('lng')
         }
-        console.log(coords)
         lat = coords.lat
         lng = coords.lng
         mapService
