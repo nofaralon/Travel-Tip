@@ -11,7 +11,7 @@ var gMap;
 
 function initMap(lat = 30.0749831, lng = 30.9120554) {
     console.log('hi')
-    var url = window.location.href
+    var url = window.location
     console.log(url);
     const newparam = new URLSearchParams(url)
     if (newparam.get('lat')) {
