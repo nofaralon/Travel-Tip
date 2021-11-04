@@ -18,7 +18,7 @@ function onInit() {
     var url = window.location.href
     console.log(url);
     const newparam = new URLSearchParams(url)
-    console.log(newparam.get('lat'))
+    console.log(newparam)
     if (newparam.get('lat')) {
         var coords = {
             lat: newparam.get('lat'),
