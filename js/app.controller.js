@@ -15,7 +15,7 @@ window.onGoUrlParams = onGoUrlParams;
 
 function onInit() {
     console.log('hi')
-    var url = window.location
+    var url = window.location.href
     console.log(url);
     mapService
         .initMap()
