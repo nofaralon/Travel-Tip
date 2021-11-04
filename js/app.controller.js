@@ -16,16 +16,18 @@ window.onGoUrlParams = onGoUrlParams;
 function onInit() {
     var url = window.location.href
     console.log(url);
-    const newparam = new URLSearchParams(url)
+    const newParam = new URLSearchParams(url)
     console.log(new URLSearchParams(url))
     console.log('hi test')
-    if (newparam.get('lat')) {
+    if (newParam.get('lat')) {
         var coords = {
-            lat: newparam.get('lat'),
-            lng: newparam.get('lng')
+            lat: newParam.get('lat'),
+            lng: newParam.get('lng')
         }
         lat = coords.lat
         lng = coords.lng
+    console.log('coords:',coords)
+
         mapService
         .initMap(lat,lng)
         .then((gMap) => {
