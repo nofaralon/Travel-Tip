@@ -20,7 +20,7 @@ function onInit() {
     for (const [key, value] of newParam) {
         console.log(`${key} => ${value}`);
     }
-    console.log('hi test 2')
+    console.log('hi test 2.2')
     if (newParam.get('lat')) {
         var coords = {
             lat: newParam.get('lat'),
