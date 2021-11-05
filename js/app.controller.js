@@ -20,7 +20,7 @@ function onInit() {
     for (const [key, value] of newParam) {
         console.log(`${key} => ${value}`);
     }
-    console.log('hi test 1')
+    console.log('hi test 2')
     if (newParam.get('lat')) {
         var coords = {
             lat: newParam.get('lat'),
@@ -165,7 +165,7 @@ function onGoUrlParams() {
         })
         .then((res) => {
             var NewStr = res.toString()
-            return `http://nofaralon.github.io/Travel-Tip?${NewStr}`
+            return `http://nofaralon.github.io/Travel-Tip?&${NewStr}`
         })
         .then((url) => {
             // console.log(url);
