@@ -31,7 +31,7 @@ function onInit() {
             console.log(typeof(lng));
         }
     }
-    console.log('hi test 5')
+    console.log('hi test 6')
     // if (newParam.get('lat')) {
     //     var coords = {
     //         lat: newParam.get('lat'),
