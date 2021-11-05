@@ -16,31 +16,17 @@ window.onGoUrlParams = onGoUrlParams;
 function onInit() {
     var url = window.location.href
     const newParam = new URLSearchParams(url)
-    console.log(newParam)
     for (const [key, value] of newParam) {
-        console.log(`${key} => ${value}`);
         if (key==='lat'){
             var lat=+value
             lat=Number(lat)
-            console.log(typeof(lat));
         }
 
         if (key==='lng'){
             var lng=+value
             lng=Number(lng)
-            console.log(typeof(lng));
         }
     }
-    console.log('hi test 6')
-    // if (newParam.get('lat')) {
-    //     var coords = {
-    //         lat: newParam.get('lat'),
-    //         lng: newParam.get('lng')
-    //     }
-    //     lat = coords.lat
-    //     lng = coords.lng
-    // console.log('coords:',coords)
-
         mapService
         .initMap(lat,lng)
         .then((gMap) => {
@@ -62,29 +48,6 @@ function onInit() {
     var key = locService.getKey();
     var places = storage.load(key);
     if (places) renderPlaces(places);
-// else{
-//     mapService
-//     .initMap()
-//     .then((gMap) => {
-//         gMap.addListener("click", (mapsMouseEvent) => {
-//             var placeName = prompt("Enter your place name");
-//             var location = mapsMouseEvent.latLng.toJSON();
-//             var lat = location.lat;
-//             var lng = location.lng;
-//             var createdAt = Date.now();
-//             locService.creatNewLocation(lat, lng, createdAt, placeName);
-//             onAddMarker(lat, lng)
-//             locService.getLocs().then((places) => {
-//                 renderPlaces(places);
-//             })
-//         });
-//     })
-// .catch(() => console.log("Error: cannot init map"));
-// var key = locService.getKey();
-// var places = storage.load(key);
-// if (places) renderPlaces(places);
-// }
-    
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -178,23 +141,6 @@ function onGoUrlParams() {
             return `http://nofaralon.github.io/Travel-Tip/?&${NewStr}`
         })
         .then((url) => {
-            // console.log(url);
             window.location.assign(url);
         })
-
-
-
 }
-
-
-// var url = window.location.href
-//     const newparam = new URLSearchParams(url)
-//     console.log(newparam.get('lat'));
-//     if (newparam.get('lat')) {
-//         var coords = {
-//             lat: newparam.get('lat'),
-//             lng: newparam.get('lng')
-//         }
-//         lat = coords.lat
-//         lng = coords.lng
-//     }
