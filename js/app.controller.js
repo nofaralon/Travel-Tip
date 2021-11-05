@@ -19,16 +19,23 @@ function onInit() {
     console.log(newParam)
     for (const [key, value] of newParam) {
         console.log(`${key} => ${value}`);
-    }
-    console.log('hi test 2.2')
-    if (newParam.get('lat')) {
-        var coords = {
-            lat: newParam.get('lat'),
-            lng: newParam.get('lng')
+        if (key==='lat'){
+            var lat=value
         }
-        lat = coords.lat
-        lng = coords.lng
-    console.log('coords:',coords)
+
+        if (key==='lng'){
+            var lng=value
+        }
+    }
+    console.log('hi test 3')
+    // if (newParam.get('lat')) {
+    //     var coords = {
+    //         lat: newParam.get('lat'),
+    //         lng: newParam.get('lng')
+    //     }
+    //     lat = coords.lat
+    //     lng = coords.lng
+    // console.log('coords:',coords)
 
         mapService
         .initMap(lat,lng)
@@ -51,29 +58,28 @@ function onInit() {
     var key = locService.getKey();
     var places = storage.load(key);
     if (places) renderPlaces(places);
-    }else{
-        mapService
-        .initMap()
-        .then((gMap) => {
-            gMap.addListener("click", (mapsMouseEvent) => {
-                var placeName = prompt("Enter your place name");
-                var location = mapsMouseEvent.latLng.toJSON();
-                var lat = location.lat;
-                var lng = location.lng;
-                var createdAt = Date.now();
-                locService.creatNewLocation(lat, lng, createdAt, placeName);
-                onAddMarker(lat, lng)
-                locService.getLocs().then((places) => {
-                    renderPlaces(places);
-                })
-            });
-        })
-
-    .catch(() => console.log("Error: cannot init map"));
-    var key = locService.getKey();
-    var places = storage.load(key);
-    if (places) renderPlaces(places);
-    }
+// else{
+//     mapService
+//     .initMap()
+//     .then((gMap) => {
+//         gMap.addListener("click", (mapsMouseEvent) => {
+//             var placeName = prompt("Enter your place name");
+//             var location = mapsMouseEvent.latLng.toJSON();
+//             var lat = location.lat;
+//             var lng = location.lng;
+//             var createdAt = Date.now();
+//             locService.creatNewLocation(lat, lng, createdAt, placeName);
+//             onAddMarker(lat, lng)
+//             locService.getLocs().then((places) => {
+//                 renderPlaces(places);
+//             })
+//         });
+//     })
+// .catch(() => console.log("Error: cannot init map"));
+// var key = locService.getKey();
+// var places = storage.load(key);
+// if (places) renderPlaces(places);
+// }
     
 }
 
@@ -165,7 +171,7 @@ function onGoUrlParams() {
         })
         .then((res) => {
             var NewStr = res.toString()
-            return `http://nofaralon.github.io/Travel-Tip?&${NewStr}`
+            return `http://nofaralon.github.io/Travel-Tip/?&${NewStr}`
         })
         .then((url) => {
             // console.log(url);
