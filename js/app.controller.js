@@ -21,13 +21,17 @@ function onInit() {
         console.log(`${key} => ${value}`);
         if (key==='lat'){
             var lat=+value
+            lat=Number(lat)
+            console.log(typeof(lat));
         }
 
         if (key==='lng'){
             var lng=+value
+            lng=Number(lng)
+            console.log(typeof(lng));
         }
     }
-    console.log('hi test 4')
+    console.log('hi test 5')
     // if (newParam.get('lat')) {
     //     var coords = {
     //         lat: newParam.get('lat'),
