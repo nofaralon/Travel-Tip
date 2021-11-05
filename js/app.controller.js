@@ -15,10 +15,12 @@ window.onGoUrlParams = onGoUrlParams;
 
 function onInit() {
     var url = window.location.href
-    console.log(url);
     const newParam = new URLSearchParams(url)
     console.log(newParam)
-    console.log('hi test 10')
+    for (const [key, value] of newParam) {
+        console.log(`${key} => ${value}`);
+    }
+    console.log('hi test 1')
     if (newParam.get('lat')) {
         var coords = {
             lat: newParam.get('lat'),
